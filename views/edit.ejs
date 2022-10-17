@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Programming Blog</title>
+        <link rel = "stylesheet" href = "/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="/script.js"></script>
+    </head>
+    <body>
+        <%- include("header") %>
+        <main>
+            <form action = "/update/<%= article.id %>" method = "POST" >
+                <div class = "form_title_box">
+                    <p class = "form_title">Title :</p>
+                    <input type = "text" name = "title" class = form_title_input value = <%= article.title %>>
+                  </div>
+                  <div class = "form_title_box">
+                    <p class = "form_title">Summary :</p>
+                    <input type = "text" name = "summary" class = form_title_input value = <%= article.summary %>>
+                  </div>
+                  <div class = "form_text_box">
+                    <p class = "form_title">Content :</p>
+                    <textarea name = "content" class = "form_textarea" value = <%= article.content %>></textarea>
+                  </div>
+                  <div class = "form_title_box">
+                    <p class = "form_title">Category :</p>
+                    <div class = "select_and_btn">
+                    <select name = "category" class = "select_tag" value = <%= article.category %>>
+                      <option>Ruby</option>
+                      <option>Javascript</option>
+                      <option>Java</option>
+                      <option>Python</option>
+                      <option>PHP</option>
+                      <option>Node.js</option>
+                      <option>React</option>
+                      <option>HTML & CSS</option>
+                      <option>SQL</option>
+                      <option>Saas</option>
+                      <option>Git & Heroku</option>
+                      <option>Figma</option>
+                      <option>Command Line</option>
+                    </select>
+                    <input type = "submit" value = "Post" class = "post_btn">
+                  </div>
+            </form>
+        </main>
+        <footer>
+            <p>COPYRIGHT</p>
+        </footer>
+      <script src = “/script.js”></script>
+    </body>
+</html>

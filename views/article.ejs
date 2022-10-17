@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Programming Blog</title>
+        <link rel = "stylesheet" href = "/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="/script.js"></script>
+    </head>
+    <body>
+        <%- include("header"); %>
+        <main>
+            <div class = "article_detail">
+             <h2 class = "article_title"><%= article.title %></h2>
+             <p class = "article_username">By <a href = "/user/<%= article.userid %>"><%= article.username %></a></p>
+             <p><%= article.content %></p>
+             <% if(article.userid == locals.id){ %>
+              <div class = article_btn_list>
+                <button class = "edit_btn"><a href = "/edit/<%= article.id %>" >Edit</a></button>
+                <form action = "/delete/<%= article.id %>" method = "POST">
+                    <input type = "submit" value = "Delete" class = "delete_btn">
+                </form>
+              </div>
+             <%} %>
+            </div>
+        </main>
+        <footer>
+            <p>COPYRIGHT</p>
+        </footer>
+      <script src = “/script.js”></script>
+    </body>
+</html>

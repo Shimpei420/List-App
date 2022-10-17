@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Programming Blog</title>
+        <link rel = "stylesheet" href = "/css/style.css">
+    </head>
+    <body>
+        <%- include ("header"); %>
+        <main>
+          <% if(errors.length > 0){ %>
+            <ul class = "error_box">
+             <% errors.forEach((error => { %>
+              <li class = "error_message"><%= error %></li>
+             <% })) %> 
+            </ul>
+          <% } %>
+          <form action = "/signup" method = "POST" class = "signup_form">
+            <div class = signup_box>
+             <p class = "signup_title">Name</p>
+             <input type = "text" name = "name" class = "signup_input">
+            </div>
+            <div class = "signup_box">
+             <p class = "signup_title">Email Address</p>
+             <input type = "text" name = "email" class = "signup_input">
+            </div>
+            <div class = "signup_box">
+             <p class = "signup_title">Password</p>
+             <input type = "password" name = "password" class = signup_input>
+            </div>
+            <div class = "signup_btn">
+             <input type = "submit" value = "Sign Up" class = "signup_send_btn">
+            </div>
+          </form>  
+        </main>
+        <footer>
+            <p>COPYRIGHT</p>
+        </footer>
+
+    </body>     
+</html>

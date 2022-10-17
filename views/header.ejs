@@ -1,0 +1,28 @@
+<header>
+    <div class = "header_bar">
+     <div class = "title_box">
+      <a href = "/" class = "title">Programming Blog</a>
+     </div>
+     <div class = "search_box">
+        <form action = "/search" method = "GET" >
+         <input type = "text" name = "search" class = "search_bar">
+         <input type = "submit" value = "Search" class = "search_btn">
+        </form>
+     </div>
+     <div class = "menu_box">
+     <ul class = "menu_bar">
+        <% if(locals.isLoggedIn){ %>
+            <li><span class = "welcome">Welcome</span><a href = "/user/<%= locals.id %>" class = "user_btn"><%= locals.name %></a></li>
+            <li class = "menu_list"><a href = "/" class= "list">Articles</a></li>
+            <li class = "menu_list"><a href = "/new" class= "list">New Article</a></li>
+            <li class = "menu_list"><a href = "/logout" class= "list">Log out</a></li>
+        <% }else{ %>
+            <li class = menu_list><p class = "user_guest">Welcome Guest</p></li>
+            <li class = "menu_list"><a href = "/" class= "list">Articles</a></li>     
+            <li class = "menu_list"><a href = "/signup" class= "list">Sign up</a></li>
+            <li class = "menu_list"><a href = "/login" class= "list">Log in</a></li>
+        <% } %>
+     </ul>
+    </div>
+   </div>
+</header>

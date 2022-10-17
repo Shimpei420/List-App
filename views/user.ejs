@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Programming Blog</title>
+        <link rel = "stylesheet" href = "/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="../script.js"></script>
+    </head>
+    <body>
+        <%- include("header"); %>
+        <main>
+            <h1 class = "user_title"><%= user.name %>'s Articles</h1>
+            <ul class = "article_list">
+                <% articles.forEach((article) => { %>
+                    <li class = "article">
+                        <h2 class = "user_article_title"><%= article.title %></h2>
+                        <p class = article_category>(<%= article.category %>)</p>
+                        <p class = "article_username">By <%= article.username %></p>
+                        <p class = article_summary><%= article.summary %></p>
+                        <a href = "/article/<%= article.id %>" class = "detail_btn">Detail</a>
+                    </li>
+                <% }) %>    
+            </ul>       
+        </main>
+        <footer>
+            <p>COPYRIGHT</p>
+        </footer>
+      <script src = “/script.js”></script>
+    </body>
+</html>

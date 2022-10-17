@@ -1,0 +1,10 @@
+<ul class = "article_list">
+    <% articles.forEach((article) => { %>
+        <li class = "article">
+            <h2 class = "article_title"><%= article.title %></h2>
+            <p class = "article_username">By <a href = "/user/<%= article.userid %>"><%= article.username %></a></p>
+            <p class = article_summary><%= article.summary %></p>
+            <a href = "/article/<%= article.id %>" class = "detail_btn">Detail</a>
+        </li>
+    <% }) %>
+</ul>

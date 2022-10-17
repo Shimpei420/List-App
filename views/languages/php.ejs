@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Programming Blog</title>
+        <link rel = "stylesheet" href = "/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="../script.js"></script>
+    </head>
+    <body>
+        <%- include("../header"); %>
+        <main>
+            <h1 class = "language_title">PHP</h1>
+            <div class = "explanation_box">
+              <p class = "explanation_content">
+                A popular general-purpose scripting language that is especially suited to web development.
+                Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.
+              </p >
+           </div>
+            <%- include("languagemain"); %>
+        </main>
+        <footer>
+            <p>COPYRIGHT</p>
+        </footer>
+      <script src = “/script.js”></script>
+    </body>
+</html>

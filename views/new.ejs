@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Programming Blog</title>
+        <link rel = "stylesheet" href = "css/style.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="/script.js"></script>
+    </head>
+    <body>
+        <%- include("header") %>
+        <main>
+            <form action = "/create" method = "POST" class = "new_form">
+                <div class = "form_title_box">
+                  <p class = "form_title">Title :</p>
+                  <input type = "text" name = "title" class = form_title_input>
+                </div>
+                <div class = "form_title_box">
+                  <p class = "form_title">Summary :</p>
+                  <input type = "text" name = "summary" class = form_title_input>
+                </div>
+                <div class = "form_text_box">
+                  <p class = "form_title">Content :</p>
+                  <textarea name = "content" class = "form_textarea"></textarea>
+                </div>
+                <div class = "form_title_box">
+                  <p class = "form_title">Category :</p>
+                  <div class = "select_and_btn">
+                  <select name = "category" class = "select_tag">
+                    <option>Ruby</option>
+                    <option>Javascript</option>
+                    <option>Java</option>
+                    <option>Python</option>
+                    <option>PHP</option>
+                    <option>Node.js</option>
+                    <option>React</option>
+                    <option>HTML & CSS</option>
+                    <option>SQL</option>
+                    <option>Saas</option>
+                    <option>Git & Heroku</option>
+                    <option>Figma</option>
+                    <option>Command Line</option>
+                  </select>
+                  <input type = "submit" value = "Post" class = "post_btn">
+                </div>
+                </div>
+                
+            </form>
+        </main>
+        <footer>
+            <p>COPYRIGHT</p>
+        </footer>
+        <script src = “/script.js”></script>
+    </body>
+</html>
