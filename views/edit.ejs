@@ -13,20 +13,20 @@
             <form action = "/update/<%= article.id %>" method = "POST" >
                 <div class = "form_title_box">
                     <p class = "form_title">Title :</p>
-                    <input type = "text" name = "title" class = form_title_input value = <%= article.title %>>
+                    <input type = "text" name = "title" class = form_title_input value = '<%= article.title %>'>
                   </div>
                   <div class = "form_title_box">
                     <p class = "form_title">Summary :</p>
-                    <input type = "text" name = "summary" class = form_title_input value = <%= article.summary %>>
+                    <input type = "text" name = "summary" class = form_title_input value = '<%= article.summary %>'>
                   </div>
                   <div class = "form_text_box">
-                    <p class = "form_title">Content :</p>
-                    <textarea name = "content" class = "form_textarea" value = <%= article.content %>></textarea>
+                    <p class = "form_title">Content :</p>s
+                    <textarea name = "content" class = "form_textarea" ><%= article.content %></textarea>
                   </div>
                   <div class = "form_title_box">
                     <p class = "form_title">Category :</p>
                     <div class = "select_and_btn">
-                    <select name = "category" class = "select_tag" value = <%= article.category %>>
+                    <select name = "category" class = "select_tag" value = '<%= article.category %>'>
                       <option>Ruby</option>
                       <option>Javascript</option>
                       <option>Java</option>

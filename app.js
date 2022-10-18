@@ -122,6 +122,27 @@ app.get("/languages/node", (req, res) => {
     )   
 })
 
+app.get("/languages/git&heroku", (req, res) => {
+    const language = "Git & Heroku"
+    connection.query(
+        "SELECT * FROM articles WHERE category = ?",
+        [language],
+        (error, results) => {
+            res.render("languages/git&heroku.ejs", {articles: results})
+        }
+    )       
+})
+
+app.get("/languages/react", (req, res) => {
+    const language = "React"
+    connection.query(
+        "SELECT * FROM articles WHERE category = ?",
+        [language],
+        (error, results) => {
+            res.render("languages/react.ejs", {articles: results})
+        }
+    )       
+})
 
 //New, Post, Edit, Delete
 

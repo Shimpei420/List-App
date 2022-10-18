@@ -109,9 +109,15 @@ main{
 
 .language_list{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-left: 0;
     flex-wrap: wrap;
+}
+
+.language_list::after{
+    display: block;
+        content:"";
+        width: 30%;
 }
 
 .language_item{
@@ -184,6 +190,10 @@ main{
 
 .article_summary{
     text-align: center;
+}
+
+.article_content{
+    white-space: pre-wrap;
 }
 
 .detail_btn{
