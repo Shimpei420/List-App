@@ -20,27 +20,13 @@
                     <input type = "text" name = "summary" class = form_title_input value = '<%= article.summary %>'>
                   </div>
                   <div class = "form_text_box">
-                    <p class = "form_title">Content :</p>s
+                    <p class = "form_title">Content :</p>
                     <textarea name = "content" class = "form_textarea" ><%= article.content %></textarea>
                   </div>
                   <div class = "form_title_box">
                     <p class = "form_title">Category :</p>
                     <div class = "select_and_btn">
-                    <select name = "category" class = "select_tag" value = '<%= article.category %>'>
-                      <option>Ruby</option>
-                      <option>Javascript</option>
-                      <option>Java</option>
-                      <option>Python</option>
-                      <option>PHP</option>
-                      <option>Node.js</option>
-                      <option>React</option>
-                      <option>HTML & CSS</option>
-                      <option>SQL</option>
-                      <option>Saas</option>
-                      <option>Git & Heroku</option>
-                      <option>Figma</option>
-                      <option>Command Line</option>
-                    </select>
+                     <%- include("select") %>
                     <input type = "submit" value = "Post" class = "post_btn">
                   </div>
             </form>

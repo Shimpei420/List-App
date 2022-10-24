@@ -2,9 +2,19 @@
     <% articles.forEach((article) => { %>
         <li class = "article">
             <h2 class = "article_title"><%= article.title %></h2>
-            <p class = "article_username">By <a href = "/user/<%= article.userid %>"><%= article.username %></a></p>
+            <p class = "article_username">By <a href = "/user?id=<%= article.userid %>"><%= article.username %></a></p>
             <p class = article_summary><%= article.summary %></p>
             <a href = "/article/<%= article.id %>" class = "detail_btn">Detail</a>
         </li>
     <% }) %>
 </ul>
+ <ul class = "page_list">
+    <% for(let i = 1; i <= pageNumber; i++){ %>
+        <% if(i == page){ %>
+          <li class = "current_page_number"><a href = "/languages/<%= language %>/<%= i %>" class = "page_link"><%= i %></a></li>
+        <% }else{ %>
+          <li class = "page_number"><a href = "/languages/<%= language %>/<%= i %>" class = "page_link"><%= i %></a></li>
+        <% } %>
+     <% } %>
+ </ul>
+

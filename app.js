@@ -3,9 +3,14 @@ const mysql = require('mysql');
 const app = express();
 const session = require('express-session');
 const bcrypt = require("bcrypt");
+const paginate = require('express-paginate');
+const fs = require("fs");
+const npp = 5; //number per page
+const languages = ["Ruby", "Javascript", "Java", "Python", "PHP", "Node", "Git&Heroku", "React"];
 
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}));
+app.use(paginate.middleware(10, 50));
 
 
 const connection = mysql.createConnection({
@@ -47,102 +52,84 @@ connection.connect((err) => {
 //Index page
 
 app.get('/', (req, res) => {
+    let countbox = {}
+    languages.forEach((language)=>{{
+        connection.query(
+            "SELECT * FROM articles WHERE category = ?",
+            [language],
+            (errors, result) => {
+                count = result.length
+                countbox[language] = count
+            }
+        )
+    }})
     connection.query(
         "SELECT * FROM articles",
-        (error, results) => {
-            res.render('index.ejs', {articles: results});
+        (errors, result)=>{
+            res.render('index.ejs', {languages, fs, countbox, count})
         }
-    );
-});
+    )
+})    
+
 
 //To go to each page of languages
-app.get("/languages/ruby", (req, res) => {
-    const language = "Ruby"
-    connection.query(
-        "SELECT * FROM articles WHERE category = ?",
-        [language],
-        (error, results) => {
-            res.render("languages/ruby.ejs", {articles: results})
-        }
-    )   
+
+languages.forEach((language)=>{
+    app.get(`/languages/${language}`, (req, res) => {
+        let articles = ""  
+        let pageNumber = 0
+        let page = 1
+        connection.query(
+            "SELECT * FROM articles WHERE category = ?",
+            [language],
+            (error, results) =>{
+                pageNumber = Math.ceil(results.length / npp)
+            }
+        ),
+        connection.query(
+            "SELECT * FROM articles WHERE category = ? LIMIT ?",
+            [language, npp],
+            (error, results)=>{
+                articles = results
+            res.render("languages/" + language + ".ejs", {articles, pageNumber, language, page})
+            })
+    })
 })
 
-app.get("/languages/javascript", (req, res) => {
-    const language = "Javascript"
-    connection.query(
-        "SELECT * FROM articles WHERE category = ?",
-        [language],
-        (error, results) => {
-            res.render("languages/javascript.ejs", {articles: results})
+languages.forEach((language)=>{
+    app.get(`/languages/${language}/:page`, (req, res) =>{
+        let articles = ""  
+        let pageNumber = 0
+        let page = req.params.page
+        let count = 0
+        connection.query(
+            "SELECT * FROM articles WHERE category = ?",
+            [language],
+            (error, results) =>{
+                pageNumber = Math.ceil(results.length / npp)
+            }
+        )
+        if(page === "" || page == 1){
+            connection.query(
+                "SELECT * FROM articles WHERE category = ? LIMIT ?",
+                [language, npp],
+                (error, results)=>{
+                    articles = results
+                    page = 1
+                    res.render("languages/" + language + ".ejs", {articles, pageNumber, language, page})
+                })
+        }else{
+            connection.query(
+                "SELECT * FROM articles WHERE category = ? LIMIT ? OFFSET ?" ,
+                [language, npp, npp * (page - 1)],
+                (error, results)=>{
+                    articles = results
+                    res.render("languages/" + language + ".ejs", {articles, pageNumber, language, page})
+                })
         }
-    )   
+    })
 })
 
-app.get("/languages/java", (req, res) => {
-    const language = "Java"
-    connection.query(
-        "SELECT * FROM articles WHERE category = ?",
-        [language],
-        (error, results) => {
-            res.render("languages/java.ejs", {articles: results})
-        }
-    )   
-})
-
-app.get("/languages/python", (req, res) => {
-    const language = "Python"
-    connection.query(
-        "SELECT * FROM articles WHERE category = ?",
-        [language],
-        (error, results) => {
-            res.render("languages/python.ejs", {articles: results})
-        }
-    )   
-})
-
-app.get("/languages/php", (req, res) => {
-    const language = "PHP"
-    connection.query(
-        "SELECT * FROM articles WHERE category = ?",
-        [language],
-        (error, results) => {
-            res.render("languages/php.ejs", {articles: results})
-        }
-    )   
-})
-
-app.get("/languages/node", (req, res) => {
-    const language = "Node.js"
-    connection.query(
-        "SELECT * FROM articles WHERE category = ?",
-        [language],
-        (error, results) => {
-            res.render("languages/node.ejs", {articles: results})
-        }
-    )   
-})
-
-app.get("/languages/git&heroku", (req, res) => {
-    const language = "Git & Heroku"
-    connection.query(
-        "SELECT * FROM articles WHERE category = ?",
-        [language],
-        (error, results) => {
-            res.render("languages/git&heroku.ejs", {articles: results})
-        }
-    )       
-})
-
-app.get("/languages/react", (req, res) => {
-    const language = "React"
-    connection.query(
-        "SELECT * FROM articles WHERE category = ?",
-        [language],
-        (error, results) => {
-            res.render("languages/react.ejs", {articles: results})
-        }
-    )       
-})
 
 //New, Post, Edit, Delete
 
@@ -203,7 +190,6 @@ app.post("/delete/:id", (req, res) => {
 });
 
 //User session (Sign-up, Log-in, Log-out)
-
 app.get("/signup", (req, res) => {
     res.render("signup.ejs", {errors: []});
 })
@@ -285,7 +271,6 @@ app.post("/login", (req, res, next) => {
 
     if(errors.length > 0){
         res.render("login.ejs",{errors: errors});
-        console.log(errors);
     }else{
         next();
     }
@@ -296,6 +281,7 @@ app.post("/login", (req, res, next) => {
             "SELECT * FROM users WHERE email = ?",
             [email],
             (error ,results) => {
+                const errors = []
                 if(results.length > 0){
                     const plain = req.body.password;
                     const hash = results[0].password;
@@ -305,11 +291,13 @@ app.post("/login", (req, res, next) => {
                             req.session.name = results[0].name
                             res.redirect("/");
                         }else{
-                            res.redirect("/login");
+                            errors.push("The password is wrong")
+                            res.render("login.ejs", {errors: errors})
                         }
                     })
                 }else{
-                    res.redirect("/login");
+                    errors.push("This email is not registered yet")
+                    res.render("login.ejs", {errors: errors});
                 }
             }
          )
@@ -325,40 +313,83 @@ app.get("/logout", (req, res) => {
 
 
 //Search
-app.get("/search", (req, res) => {
-    keyWord = req.query.search
+
+app.get("/search", (req, res) =>{
+    let articles = ""  
+    let pageNumber = 0
+    const keyWord = req.query.search
+    let page = req.query.page
     connection.query(
         "SELECT * FROM articles WHERE content LIKE ?",
-        "%" + [keyWord] + "%",
-        (error, results) => {
-            res.render("search.ejs", {articles: results});
+        ["%" + keyWord + "%"],
+        (error, results) =>{
+            pageNumber = Math.ceil(results.length / npp)
+            
         }
     )
+    if(page === undefined || page == 1){
+        connection.query(
+            "SELECT * FROM articles WHERE content LIKE ? LIMIT ?",
+            ["%" + keyWord + "%", npp],
+            (error, results)=>{
+                articles = results
+                page = 1
+                res.render("search.ejs", {articles, pageNumber, page, keyWord})
+            })
+    }else{
+        connection.query(
+            "SELECT * FROM articles WHERE content LIKE ? LIMIT ? OFFSET ?" ,
+            ["%" + keyWord + "%", npp, npp * (page - 1)],
+            (error, results)=>{
+                articles = results
+                res.render("search.ejs", {articles, pageNumber, page, keyWord})
+            })
+    }
 })
 
 //User Page
-app.get("/user/:id", (req, res) =>{
-    const id = req.params.id;
+
+app.get("/user", (req, res) =>{
+    const id = req.query.id
+    let page = req.query.page
+    let pageNumber = 0
     let articles = ""
+    let user = ""
     connection.query(
         "SELECT * FROM articles WHERE userid = ?",
         [id],
         (error, results) =>{
             if(error) throw error;
-            articles = results;
-            //console.log(results);
+            pageNumber = Math.ceil(results.length / npp)
         }
-    );
+    ),
     connection.query(
         "SELECT * FROM users WHERE id = ?",
         [id],
         (error, result)=>{
-            res.render("user.ejs", {articles, user: result[0]})
-            //console.log(result)
+             user = result[0]
         }
-    )
+    );
+    if(page === undefined || page == 1){
+        connection.query(
+            "SELECT * FROM articles WHERE userid = ? LIMIT ?",
+            [id, npp],
+            (error, results) =>{
+                articles = results
+                res.render("user.ejs", {user, articles, pageNumber, page})
+            }
+        )
+    }else{
+        connection.query(
+            "SELECT * FROM articles WHERE userid = ? LIMIT ? OFFSET ?",
+            [id, npp, npp * (page-1)],
+            (error, results) =>{
+                articles = results,
+                res.render("user.ejs", {user, articles, pageNumber, page})
+            }
+        )
     }
-);
+});
 
 
 app.listen(3000);

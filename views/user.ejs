@@ -21,7 +21,17 @@
                         <a href = "/article/<%= article.id %>" class = "detail_btn">Detail</a>
                     </li>
                 <% }) %>    
-            </ul>       
+            </ul> 
+            <ul class = "page_list">
+                <% for(let i = 1; i <= pageNumber; i++){ %>
+                    <% if(i == page){ %>
+                      <li class = "current_page_number"><a href = "/user?id=<%= user.id %>&page=<%= i %>" class = "page_link"><%= i %></a></li>
+                    <% }else{ %>
+                      <li class = "page_number"><a href = "/user?id=<%= user.id %>&page=<%= i %>" class = "page_link"><%= i %></a></li>
+                    <% } %>
+                 <% } %>
+             </ul>
+               
         </main>
         <footer>
             <p>COPYRIGHT</p>

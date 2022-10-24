@@ -12,75 +12,25 @@
         <main>
           <div class = main_language>
             <ul class = language_list>
-                <li class = language_item>
-                    <div class = language_box>
-                      <div class = language_img_box>
-                        <img src = "pictures/languages/ruby.png" class = language_img>
-                      </div>
-                      <a href = "/languages/ruby" class = "language_title">Ruby</a>
-                    </div>
-                </li>
-                <li class = language_item>
-                    <div class = language_box>
-                     <div class = language_img_box>
-                        <img src = "pictures/languages/javascript.png" class = language_img>
-                     </div>
-                     <a href = "/languages/javascript" class = "language_title">Javascript</a>
-                    </div>
-                </li>
-                <li class = language_item>
-                    <div class = language_box>
-                     <div class = language_img_box>
-                        <img src = "pictures/languages/java.jpeg" class = language_img>
-                     </div>
-                     <a href = "/languages/java" class = "language_title">Java</a>
-                    </div>
-                </li>
-                <li class = language_item>
-                    <div class = language_box>
-                     <div class = language_img_box>
-                        <img src = "pictures/languages/python.jpeg" class = language_img>
-                     </div>
-                     <a href = "/languages/python" class = "language_title">Python</a>
-                    </div>
-                </li>
-                <li class = language_item>
-                    <div class = language_box>
-                     <div class = language_img_box>
-                        <img src = "pictures/languages/php.png" class = language_img>
-                     </div>
-                     <a href = "/languages/php" class = "language_title">PHP</a>
-                    </div>
-                </li>
-                <li class = language_item>
-                    <div class = language_box>
-                     <div class = language_img_box>
-                        <img src = "pictures/languages/node.jpeg" class = language_img>
-                     </div>
-                     <a href = "/languages/node" class = "language_title">Node.js</a>
-                    </div>
-                </li>
-                <li class = language_item>
-                    <div class = language_box>
-                     <div class = language_img_box>
-                        <img src = "pictures/languages/git & heroku.png" class = language_img>
-                     </div>
-                     <a href = "/languages/git&heroku" class = "language_title">Git & Heroku</a>
-                    </div>
-                </li>
-                <li class = language_item>
-                    <div class = language_box>
-                     <div class = language_img_box>
-                        <img src = "pictures/languages/react.png" class = language_img>
-                     </div>
-                     <a href = "/languages/react" class = "language_title">React</a>
-                    </div>
-                </li>
-
-
+                <% languages.forEach((language)=>{ %>
+                    <li class = "language_item">
+                        <div class = "language_box">
+                          <div class = "language_img_box">
+                            <% if(fs.existsSync("public/pictures/languages/" + language + ".png")){ %>
+                             <img src = "pictures/languages/<%= language %>.png" class = "language_img">
+                            <% }else{ %>
+                             <img src = "pictures/languages/<%= language %>.jpeg" class = "language_img">
+                            <% } %>
+                          </div>
+                          <div class = "language_box_bottom">
+                           <a href = "/languages/<%= language %>" class = "language_title"><%= language %></a>
+                           <p class = "posts_count"><%= countbox[language] %> Posts</p>
+                          </div>
+                        </div>
+                    </li>
+                 <% }) %>
             </ul>
           </div>
-           
         </main>
         <footer>
             <p>COPYRIGHT</p>

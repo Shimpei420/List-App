@@ -68,13 +68,13 @@ header{
 
 .welcome{
     color: #ffffff ;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .user_btn{
     margin: 0 0 0 20px;
     color: #ffffff ;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .menu_list{
@@ -85,12 +85,12 @@ header{
 
 .list{
     color: #ffffff;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .user_guest{
     color: #ffffff ;
-    font-size: 20px;
+    font-size: 15px;
     margin: 0;
 }
 
@@ -98,7 +98,7 @@ header{
 
 main{
     height: 100%;
-    padding: 20px;
+    padding: 10px;
     background-color: #ffffff;
 }
 
@@ -116,8 +116,8 @@ main{
 
 .language_list::after{
     display: block;
-        content:"";
-        width: 30%;
+    content:"";
+    width: 30%;
 }
 
 .language_item{
@@ -142,8 +142,27 @@ main{
     width: 100%;
 }
 
+.language_box_bottom{
+    display: flex;
+    justify-content: space-around;
+}
+
+.language_box_bottom::before{
+    display: block;
+    content:"";
+    width: 33%;
+}
 .language_title{
    color: black;
+   font-weight: 700;
+   display: inline-block;
+   width: 33%;
+}
+
+.posts_count{
+    margin: 0;
+    display: inline-block;
+    width: 33%;
 }
 
 /* each language page */
@@ -200,6 +219,34 @@ main{
     text-decoration: none;
     text-align: right;
     display: block;
+}
+
+.page_list{
+    display: flex;
+    padding-left: 0;
+    margin: 20px auto 0;
+    justify-content: center;
+}
+
+.page_number{
+   margin-right: 5px;
+   border:1px #ccc solid;color:#000053;
+   border-radius: 5px / 5px;
+   padding:10px 15px;
+   background-color: #ffffff;
+}
+
+.current_page_number{
+    margin-right: 5px;
+    border:1px #ccc solid;color:#000053;
+    border-radius: 5px / 5px;
+    padding:10px 15px;
+    background-color: #cccccc;
+}
+
+.page_link{
+    text-decoration: none;
+    color: #000000	;
 }
 
 /* Article (detail) */

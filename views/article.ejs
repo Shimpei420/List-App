@@ -12,12 +12,12 @@
         <main>
             <div class = "article_detail">
              <h2 class = "article_title"><%= article.title %></h2>
-             <p class = "article_username">By <a href = "/user/<%= article.userid %>"><%= article.username %></a></p>
+             <p class = "article_username">By <a href = "/user?id=<%= article.userid %>"><%= article.username %></a></p>
              <p class = "article_content"><%= article.content %></p>
              <% if(article.userid == locals.id){ %>
               <div class = article_btn_list>
                 <button class = "edit_btn"><a href = "/edit/<%= article.id %>" >Edit</a></button>
-                <form action = "/delete/<%= article.id %>" method = "POST">
+                <form action = "/delete/<%= article.id %>" method = "POST" id = "delete">
                     <input type = "submit" value = "Delete" class = "delete_btn">
                 </form>
               </div>

@@ -12,7 +12,7 @@
      <div class = "menu_box">
      <ul class = "menu_bar">
         <% if(locals.isLoggedIn){ %>
-            <li><span class = "welcome">Welcome</span><a href = "/user/<%= locals.id %>" class = "user_btn"><%= locals.name %></a></li>
+            <li><span class = "welcome">Welcome</span><a href = "/user?id=<%= locals.id %>" class = "user_btn"><%= locals.name %></a></li>
             <li class = "menu_list"><a href = "/" class= "list">Articles</a></li>
             <li class = "menu_list"><a href = "/new" class= "list">New Article</a></li>
             <li class = "menu_list"><a href = "/logout" class= "list">Log out</a></li>

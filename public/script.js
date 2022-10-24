@@ -67,5 +67,23 @@ $(function(){
         }
     )
 
+    $(".page_number").hover(
+        function(){
+            $(this).css("background-color", "#CCCCCC")
+        },
+        function(){
+            $(this).css("background-color", "#ffffff")
+        }
+    )
+
+    $(".delete_btn").click(function(){
+        const href = "/delete/<%= article.id %>"
+        if(confirm("Are you sure?")){
+            location.href = href
+        }else{
+            location.href = "/article/<%= article.id %>"
+        }
+
+    })
    
 });
