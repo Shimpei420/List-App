@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset = "UTF-8">
-        <title>Programming Blog</title>
-        <link rel = "stylesheet" href = "/css/style.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script type="text/javascript" src="/script.js"></script>
-    </head>
+    <%- include("head") %>
     <body>
         <%- include("header"); %>
         <main>
+          <div class = "index_search_box">
+            <form action = "/search" method = "GET" class = "index_search_form">
+             <input type = "text" name = "search" class = "index_search_bar">
+             <input type = "submit" value = "Search" class = "index_search_btn">
+            </form>
+         </div>
           <div class = main_language>
             <ul class = language_list>
                 <% languages.forEach((language)=>{ %>
@@ -23,7 +23,7 @@
                             <% } %>
                           </div>
                           <div class = "language_box_bottom">
-                           <a href = "/languages/<%= language %>" class = "language_title"><%= language %></a>
+                           <a href = "/languages/<%= language %>" class = "language_title_link"><%= language %></a>
                            <p class = "posts_count"><%= countbox[language] %> Posts</p>
                           </div>
                         </div>

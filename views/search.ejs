@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset = "UTF-8">
-        <title>Programming Blog</title>
-        <link rel = "stylesheet" href = "/css/style.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script type="text/javascript" src="/script.js"></script>
-    </head>
+    <%- include("head") %>
     <body>
         <%- include("header"); %>
         <main>
@@ -15,8 +9,8 @@
                     <li class = "article">
                         <h2 class = "article_title"><%= article.title %></h2>
                         <p class = article_summary><%= article.summary %></p>
-                        <p><%= article.category %></p>
-                        <a href = "/article/<%= article.id %>" class = "detail_button">Detail</a>
+                        <p><a href = "/languages/<%= article.category%>"><%= article.category %></a></p>
+                        <a href = "/article/<%= article.id %>" class = "detail_btn">Detail</a>
                     </li>
                 <% }) %>
             </ul>

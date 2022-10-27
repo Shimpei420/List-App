@@ -14,7 +14,7 @@ $(function(){
 
     $(".list").hover(
         function(){
-            $(this).css("color", "#0000FF");
+            $(this).css("color", "#00FFFF");
 
         },
         function(){
@@ -85,5 +85,13 @@ $(function(){
         }
 
     })
+
+    $(".hamburger").on("click", function(){
+        $(this).toggleClass("cross")
+        $(".menu_box").fadeToggle(300)
+        $("body").toggleClass("non_scroll")  
+    })
+
+    
    
 });

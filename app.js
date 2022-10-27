@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const paginate = require('express-paginate');
 const fs = require("fs");
 const npp = 5; //number per page
-const languages = ["Ruby", "Javascript", "Java", "Python", "PHP", "Node", "Git&Heroku", "React"];
+const languages = ["Ruby", "Javascript", "Java", "Python", "PHP", "Node", "Git", "Heroku", "React"];
 
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}));

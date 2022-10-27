@@ -12,17 +12,22 @@
      <div class = "menu_box">
      <ul class = "menu_bar">
         <% if(locals.isLoggedIn){ %>
-            <li><span class = "welcome">Welcome</span><a href = "/user?id=<%= locals.id %>" class = "user_btn"><%= locals.name %></a></li>
-            <li class = "menu_list"><a href = "/" class= "list">Articles</a></li>
+            <li class = "menu_list"><span class = "welcome">Welcome</span><a href = "/user?id=<%= locals.id %>" class = "user_btn"><%= locals.name %></a></li>
+            <li class = "menu_list"><a href = "/" class= "list">Home</a></li>
             <li class = "menu_list"><a href = "/new" class= "list">New Article</a></li>
             <li class = "menu_list"><a href = "/logout" class= "list">Log out</a></li>
         <% }else{ %>
-            <li class = menu_list><p class = "user_guest">Welcome Guest</p></li>
+            <li class = "menu_list"><p class = "user_guest">Welcome Guest</p></li>
             <li class = "menu_list"><a href = "/" class= "list">Articles</a></li>     
             <li class = "menu_list"><a href = "/signup" class= "list">Sign up</a></li>
             <li class = "menu_list"><a href = "/login" class= "list">Log in</a></li>
         <% } %>
      </ul>
     </div>
+    <div class = "hamburger">
+        <span class = "bar bar-top"></span>
+        <span class = "bar bar-middle"></span>
+        <span class = "bar bar-bottom"></span>
+       </div>
    </div>
 </header>
